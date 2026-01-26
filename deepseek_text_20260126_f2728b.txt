@@ -1,0 +1,6 @@
+crates/
+├── biosphere-core-aln/           # ALN shard compiler
+├── biosphere-core-vc/           # W3C VC extensions
+├── biosphere-core-runner/       # DefaultBiosphereRunner
+├── biosphere-core-telemetry/    # Osteosis implementation
+└── biosphere-core-kernel/       # KernelFootprint validation

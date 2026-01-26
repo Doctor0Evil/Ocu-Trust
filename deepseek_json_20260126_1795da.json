@@ -1,0 +1,14 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://organic.cpu/contexts/oicl-v1"
+  ],
+  "type": ["VerifiableCredential", "OrganicCpuAccessibilityCredential"],
+  "credentialSubject": {
+    "id": "did:organic:user123",
+    "neurospaceRadius": 5.0,
+    "interactionModes": ["voice", "gaze"],
+    "maxCognitiveLoad": 0.7,
+    "nonExclusionGuarantees": ["EssentialRoute", "HealthAccess"]
+  }
+}

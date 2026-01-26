@@ -1,0 +1,3 @@
+User VC + OrgCpuSnapshot → EnvelopeId → KernelFootprint → QpuDataShard
+     ↑                           ↑            ↑              ↑
+W3C Standard           ALN Compiled      Measured       Signed Proof
