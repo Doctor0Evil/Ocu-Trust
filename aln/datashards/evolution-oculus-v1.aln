@@ -1,0 +1,55 @@
+datashard evolution.oculus.v1 {
+  // EvolutionPoint-visible oculus envelope.
+  schema OculusBlinkEnvelopeV1 {
+    oculus_blinkindex: f64;   // [0.0, 1.0]
+    avg_duty:          f64;   // [0.0, 1.0]
+    oculomotor_duty:   f64;   // [0.0, 1.0]
+    corridor_safe:     bool;
+    duty_safe:         bool;
+  }
+
+  invariants OculusBlinkEnvelopeInvariants {
+    0.0 <= oculus_blinkindex <= 1.0;
+    0.0 <= avg_duty        <= 1.0;
+    0.0 <= oculomotor_duty <= 1.0;
+  }
+
+  // UpgradeDescriptor-visible constraints.
+  schema OculusUpgradeConstraintsV1 {
+    max_oculus_blinkindex: option<f64>;
+    max_avg_duty:          option<f64>;
+    max_oculomotor_duty:   option<f64>;
+    require_oculus_corridor_safe: bool;
+    require_oculus_duty_safe:     bool;
+  }
+
+  // Bind into the existing EvolutionPoint / UpgradeDescriptor surface.
+  attach EvolutionPoint {
+    field oculus_env: OculusBlinkEnvelopeV1;
+  }
+
+  attach UpgradeDescriptor {
+    field oculus_constraints: OculusUpgradeConstraintsV1;
+  }
+}
+
+// filename: aln/neurorights/visual-corridor-rights-v1.aln
+
+particle neurorights.visual.corridor.v1 {
+  fields {
+    // Reference into evolution.oculus.v1 shard.
+    oculus_blinkindex: f64;
+    corridor_safe:     bool;
+    duty_safe:         bool;
+  }
+
+  invariants {
+    // If neurorights particle is attached, visual upgrades may only proceed
+    // when the oculus corridor is safe within the configured bounds.
+    corridor_safe == true;
+    duty_safe     == true;
+  }
+
+  // No rollback/downgrade language: this particle expresses only
+  // forward-permission conditions for visual evolution.
+}
