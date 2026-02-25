@@ -1,0 +1,11 @@
+[package]
+name = "oculus-corridor-blink"
+version = "1.0.0-lab"
+edition = "2021"
+authors = ["AugDoctor <lab@eibon-gov.net>"]
+description = "Empirical Oculus Corridor BlinkIndex for Rust/ALN quantum-learning bioscale"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }  # async multi-modal sensor orchestration
