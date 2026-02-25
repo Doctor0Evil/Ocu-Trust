@@ -1,0 +1,35 @@
+particle ocu.trust.oculus.corridor.v1 {
+  schema oculus_corridor_v1;
+
+  fields {
+    oculus_blinkindex:    f64;  // [0.0, 1.0]
+    oculus_avg_duty:      f64;  // [0.0, 1.0]
+    oculomotor_duty:      f64;  // [0.0, 1.0]
+    oculus_corridor_safe: bool;
+    oculus_duty_safe:     bool;
+  }
+
+  invariants {
+    0.0 <= oculus_blinkindex <= 1.0;
+    0.0 <= oculus_avg_duty   <= 1.0;
+    0.0 <= oculomotor_duty   <= 1.0;
+  }
+
+  // Forward-only guarantee: this particle never encodes rollback.
+  // It is a measurement + gating surface for visual evolution only.
+}
+
+rule ocu.trust.oculus.strictest_wins.v1 {
+  when upgrade.touches_region in ["retina","LGN","V1","extrastriate"] {
+    require upgrade.oculus.requires_oculus_below is Some;
+    require upgrade.oculus.max_oculus_avg_duty   is Some;
+    require upgrade.oculus.max_oculomotor_duty   is Some;
+
+    // Strictest-wins: policies may only lower these thresholds, never raise
+    // them relative to previous envelopes, and may not reference "reset" or
+    // "downgrade" of oculus_blinkindex.
+    forbid text "reset_oculus_blinkindex";
+    forbid text "downgrade_oculus_state";
+    forbid text "rollback_oculus_corridor";
+  }
+}
