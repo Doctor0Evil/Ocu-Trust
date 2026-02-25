@@ -1,0 +1,17 @@
+particle ocu.trust.oculus.envelope.v1 {
+  schema  oculus_envelope_v1;
+  fields {
+    oculus_blinkindex: f64;      // [0.0, 1.0]
+    avg_duty:          f64;      // [0.0, 1.0]
+    oculomotor_duty:   f64;      // [0.0, 1.0]
+    corridor_safe:     bool;
+    duty_safe:         bool;
+  }
+  invariants {
+    0.0 <= oculus_blinkindex <= 1.0;
+    0.0 <= avg_duty        <= 1.0;
+    0.0 <= oculomotor_duty <= 1.0;
+  }
+  // No rollback / downgrade / reversal semantics: this particle is
+  // a pure measurement + gating surface for forward evolution.
+}
