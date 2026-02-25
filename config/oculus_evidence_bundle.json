@@ -1,0 +1,18 @@
+{
+  "bundle_version": "1.0.0-lab",
+  "host_did": "did:aln:phoenix:host-001",
+  "anchors": [
+    {"hex":"0xA1E9C3B2","value":1.20,"desc":"retinal_resting_atp"},
+    {"hex":"0xB47F21D0","value":2.45,"desc":"photopic_cost"},
+    {"hex":"0xC9D8047E","value":0.43,"desc":"eom_saccade_cost"},
+    {"hex":"0xD2F86144","value":0.43,"desc":"ocular_thermo_iop"},
+    {"hex":"0xE71DA2FF","value":0.68,"desc":"neurovascular"},
+    {"hex":"0xF59300C3","value":1.15,"desc":"inflammation"},
+    {"hex":"0x81D74AAC","value":0.62,"desc":"duty_cycles"},
+    {"hex":"0x92C2F9D9","value":0.55,"desc":"decoder_workload"},
+    {"hex":"0xC6E61B20","value":0.71,"desc":"protein_turnover"},
+    {"hex":"0x8F19D5EE","value":7.0,"desc":"pain_photophobia"}
+  ],
+  "calibration_weights": {"ws":0.515,"wu":0.275,"wsymp":0.210},
+  "five_d_planes": ["spatial_visual","temporal_duty","metabolic_atp","neural_hemo","sovereign_percept"]
+}
